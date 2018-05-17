@@ -20,8 +20,6 @@ def frequency_score(deciphered):
         proportion_in_deciphered = float(deciphered.count(char)) / len(deciphered)
         score += abs(proportion_in_deciphered - frequency_dict[char])
         
-    print("string was:", deciphered)
-    print("score: ", score)
     return score
 
 def xor_decrypt(encrypted):
