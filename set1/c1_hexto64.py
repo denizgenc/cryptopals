@@ -19,3 +19,9 @@ def hexto64(hexstring):
         b64list.append(base64str[num])
     
     return "".join(b64list)
+
+# Baby version - this is actually better than my hacky method
+# import base64
+# def hexto64(hexstring):
+    # byteslist = bytearray.fromhex(hexstring)
+    # return base64.b64encode(byteslist)
