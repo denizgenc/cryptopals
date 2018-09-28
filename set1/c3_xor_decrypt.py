@@ -22,7 +22,10 @@ def frequency_score(deciphered):
 
     score = 0
     for char in frequency_dict.keys():
-        proportion = float(deciphered.count(char)) / len(deciphered)
+        total_count = (deciphered.count(char)
+                      + deciphered.count(bytes([int.from_bytes(char, 'big') - 32])) )
+            # Need to count uppercase characters too, which are offset by 32
+        proportion = float(total_count) / len(deciphered)
         # len(deciphered) is why we need to pass the object as a bytes/bytearray
         # if we .decode() into a string, deciphered will have length 0.
         # This is because the loop in xor_decrypt XORs the string against every
