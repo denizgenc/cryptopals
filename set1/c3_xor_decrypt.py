@@ -33,6 +33,12 @@ def frequency_score(deciphered):
         # be EOF, and we will have a zero length deciphered.
         # This leads to a division by zero error, of course.
         score += abs(proportion - frequency_dict[char])
+
+    # The following checks for control characters in deciphered, and penalises
+    # for each one
+    for byte in deciphered: # individual elements in a bytearray are ints??
+        if byte < 32:
+            score += 10
     return score
 
 def xor_decrypt(encrypted):
