@@ -42,8 +42,7 @@ def xor_decrypt(encrypted):
         # zfill zero pads a string so that we get 01010101 instead of 1111
         xored = fixed_xor(encrypted, charstring)
 
-        hextostring = bytearray.fromhex(xored)
-        current_score = frequency_score(hextostring)
+        current_score = frequency_score(xored)
         if current_score < best_score:
             best_score = current_score
             best_guess = xored
