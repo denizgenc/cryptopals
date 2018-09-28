@@ -30,7 +30,6 @@ def frequency_score(deciphered):
         # be EOF, and we will have a zero length deciphered.
         # This leads to a division by zero error, of course.
         score += abs(proportion - frequency_dict[char])
-
     return score
 
 def xor_decrypt(encrypted):
@@ -49,4 +48,4 @@ def xor_decrypt(encrypted):
             best_score = current_score
             best_guess = xored
 
-    return best_guess
+    return best_guess, best_score
