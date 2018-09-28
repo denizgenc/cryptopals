@@ -22,7 +22,10 @@ def frequency_score(deciphered):
 
     score = 0
     for char in frequency_dict.keys():
-        proportion = float(deciphered.count(char)) / len(deciphered)
+        total_count = (deciphered.count(char)
+                      + deciphered.count(bytes([int.from_bytes(char, 'big') - 32])) )
+            # Need to count uppercase characters too, which are offset by 32
+        proportion = float(total_count) / len(deciphered)
         # len(deciphered) is why we need to pass the object as a bytes/bytearray
         # if we .decode() into a string, deciphered will have length 0.
         # This is because the loop in xor_decrypt XORs the string against every
@@ -31,6 +34,11 @@ def frequency_score(deciphered):
         # This leads to a division by zero error, of course.
         score += abs(proportion - frequency_dict[char])
 
+    # The following checks for control characters in deciphered, and penalises
+    # for each one
+    for byte in deciphered: # individual elements in a bytearray are ints??
+        if byte < 32:
+            score += 10
     return score
 
 def xor_decrypt(encrypted):
@@ -43,10 +51,9 @@ def xor_decrypt(encrypted):
         # zfill zero pads a string so that we get 01010101 instead of 1111
         xored = fixed_xor(encrypted, charstring)
 
-        hextostring = bytearray.fromhex(xored)
-        current_score = frequency_score(hextostring)
+        current_score = frequency_score(xored)
         if current_score < best_score:
             best_score = current_score
             best_guess = xored
 
-    return best_guess
+    return best_guess, best_score
