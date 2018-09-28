@@ -9,15 +9,16 @@ def hexto64(hexstring):
     # TODO: handle hex strings with an odd number of elements
     bytelist = []
     for index in range(0, len(hexstring), 2):
-        num = int(hexstring[index:index+2],16) # convert groups of 2 hex chars to ints
-        bytelist.append(format(num, "08b")) # https://docs.python.org/3/library/string.html#format-specification-mini-language
-    
+        num = int(hexstring[index:index+2], 16) # convert groups of 2 hex chars to ints
+        bytelist.append(format(num, "08b"))
+        # https://docs.python.org/3/library/string.html#format-specification-mini-language
+
     bits = "".join(bytelist)
     b64list = [] # This will hold the b64 characters we'll join and return
-    for bit in range(0, len(bits),6):
-        num = int(bits[bit:bit+6],2)
+    for bit in range(0, len(bits), 6):
+        num = int(bits[bit:bit+6], 2)
         b64list.append(base64str[num])
-    
+
     return "".join(b64list)
 
 # Baby version - this is actually better than my hacky method
