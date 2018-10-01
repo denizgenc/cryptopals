@@ -11,7 +11,7 @@ with open("4.txt") as file:
         decrypt, score = xor_decrypt(line.strip('\n')) # strip trailing newline
         scores_and_strings[score] = [decrypt.decode(errors="ignore"), line]
 
-best_score = sorted(scores_and_strings)[0] # sort by keys, then get lowest key
+best_score = sorted(scores_and_strings)[-1] # sort by keys, then get highest key
 best = scores_and_strings[best_score] # index by that key to get values
 print(f"the best line had a score of {best_score}")
 print(f"The xored lines were {best[1]}")
