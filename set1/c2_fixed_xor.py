@@ -7,12 +7,12 @@
 # 746865206b696420646f6e277420706c6179
 
 def fixed_xor(hexstring1, hexstring2):
-    first = bytearray.fromhex(hexstring1)
-    second = bytearray.fromhex(hexstring2)
+    first = bytes.fromhex(hexstring1)
+    second = bytes.fromhex(hexstring2)
 
     xored_bytes = [byte1 ^ byte2 for byte1, byte2 in zip(first, second)]
     
-    return bytearray(xored_bytes)
+    return bytes(xored_bytes)
 #    bytelist = []
 #    for index in range(0, len(hexstring1), 2):
 #        byte1 = int(hexstring1[index:index+2], 16)

@@ -6,12 +6,12 @@ from c2_fixed_xor import fixed_xor
 
 def frequency_score(deciphered):
     """
-    Scores a bytearray according to how many times it features the following
+    Scores a bytes object according to how many times it features the following
     characters: e, t, a, o, i and space
     Ripped off from mpizzzle's solution to this problem.
     """
 
-    frequents = bytearray("etaoi ", 'utf-8')
+    frequents = bytes("etaoi ", 'utf-8')
     count = 0
     for char in frequents:
         count += deciphered.count(char) + deciphered.count(char - 32)
