@@ -14,14 +14,24 @@ def frequency_score(deciphered):
     frequents = bytes("etaoi ", 'utf-8')
     count = 0
     for char in frequents:
-        count += deciphered.count(char) + deciphered.count(char - 32)
+        count += deciphered.count(char)# + deciphered.count(char - 32)
         # character plus uppercase characters (might be a mistake)
+        # Yes, it was a mistake.
 
     return count
 
 def xor_decrypt(encrypted):
+    """
+    Takes a hex string called encrypted and tries to XOR it against every possible
+    byte.
+    Returns a bytes object called the best_guess, and an integer representing its
+    best score called best_score.
+    For challenge 6 I also made it return an integer that represents the key, called
+    best_key
+    """
     best_score = 0
     best_guess = None
+    best_key = 0
     for i in range(256):
         charstring = format(i, "x").zfill(2) * (len(encrypted)//2)
         # the above makes a string of repeating chars the same size as the string
@@ -33,5 +43,6 @@ def xor_decrypt(encrypted):
         if current_score > best_score:
             best_score = current_score
             best_guess = xored
+            best_key = i
 
-    return best_guess, best_score
+    return best_guess, best_score, best_key
