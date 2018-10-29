@@ -13,7 +13,7 @@ with open("4.txt") as file:
 
 best_score = sorted(scores_and_strings)[-1] # sort by keys, then get highest key
 best = scores_and_strings[best_score] # index by that key to get values
-print(f"The key used was {key}")
+print(f"The key used was {key} - which is the character {bytes([key]).decode()}")
 print(f"the best line had a score of {best_score}")
 print(f"The xored lines were {best[1]}")
 print(f"And, when decrypted, it was {best[0]}")
