@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Write a function that takes two equal-length buffers and produces their XOR combination.
 # If your function works properly, then when you feed it the string:
 # 1c0111001f010100061a024b53535009181c
@@ -22,3 +23,11 @@ def fixed_xor(hexstring1, hexstring2):
 #        # zfill zero pads a string so that we get 01010101 instead of 1111
 
 #    return "".join(bytelist)
+
+if __name__ == "__main__":
+    string1 = "1c0111001f010100061a024b53535009181c"
+    string2 = "686974207468652062756c6c277320657965"
+    answer = fixed_xor(string1,string2).hex() # convert to hex string
+    check = "746865206b696420646f6e277420706c6179"
+
+    print("Did I get it right?", answer == check)
