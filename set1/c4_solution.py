@@ -5,7 +5,7 @@
 
 from c3_xor_decrypt import xor_decrypt
 
-with open("4.txt") as file:
+with open("input/4.txt") as file:
     scores_and_strings = {}
     for line in file:
         decrypt, score, key = xor_decrypt(line.strip('\n')) # strip trailing newline

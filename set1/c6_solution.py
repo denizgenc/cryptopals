@@ -4,8 +4,8 @@ from c6_transpose import transpose
 from c3_xor_decrypt import xor_decrypt
 from c5_repeating_key import repeating_key
 
-with open("6.txt", 'rb') as f: # open in binary mode,
-                               # as base64.decodebytes won't work on str types
+with open("input/6.txt", 'rb') as f: # open in binary mode,
+                                     # as base64.decodebytes won't work on str types
     bytes_file = bytes([byte for line in f for byte in base64.decodebytes(line)])
 
 keysize_distances = []
