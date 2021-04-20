@@ -41,9 +41,9 @@ def frequency_score(candidate):
 
     # The following checks for control characters in candidate, and penalises
     # for each one
-    for byte in deciphered: # individual elements in a bytearray are ints??
-        if byte < 32:
-            score += 10
+    # for byte in candidate: # individual elements in a bytearray are ints??
+    #     if byte < 32:
+    #         score += 10
     return score
 
 def xor_decrypt(encrypted):
