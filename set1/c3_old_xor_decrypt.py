@@ -51,6 +51,7 @@ def frequency_score(candidate):
 def xor_decrypt(encrypted):
     best_score = 100 # some high number
     best_guess = None
+    best_key = 0
     for i in range(256):
         charstring = format(i, "x").zfill(2) * (len(encrypted)//2)
         # the above makes a string of repeating chars the same size as the string
@@ -62,5 +63,6 @@ def xor_decrypt(encrypted):
         if current_score < best_score:
             best_score = current_score
             best_guess = xored
+            best_key = i
 
-    return best_guess, best_score
+    return best_guess, best_score, best_key
