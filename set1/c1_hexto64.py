@@ -7,18 +7,19 @@ import string
 base64str = string.ascii_uppercase + string.ascii_lowercase + string.digits + "+/"
 
 def hexto64(hexstring):
-    # TODO: handle hex strings with an odd number of elements
-    bytelist = []
-    for index in range(0, len(hexstring), 2):
-        num = int(hexstring[index:index+2], 16) # convert groups of 2 hex chars to ints
-        bytelist.append(format(num, "08b"))
+    nibble_list = []
+    for char in hexstring:
+        num = int(char, 16) # convert hex char to a number
+        nibble_list.append(format(num, "04b"))
         # https://docs.python.org/3/library/string.html#format-specification-mini-language
 
-    bits = "".join(bytelist)
+    bits = "".join(nibble_list)
     b64list = [] # This will hold the b64 characters we'll join and return
     for bit in range(0, len(bits), 6):
         num = int(bits[bit:bit+6], 2)
         b64list.append(base64str[num])
+
+    # TODO: Handle when you have left over hex characters (underscore padding)
 
     return "".join(b64list)
 
