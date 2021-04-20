@@ -4,7 +4,7 @@
 
 from c2_fixed_xor import fixed_xor
 
-def frequency_score(deciphered):
+def frequency_score_simple(candidate):
     """
     Scores a bytes object according to how many times it features the following
     characters: e, t, a, o, i and space
@@ -14,7 +14,7 @@ def frequency_score(deciphered):
     frequents = bytes("etaoi ", 'utf-8')
     count = 0
     for char in frequents:
-        count += deciphered.count(char)# + deciphered.count(char - 32)
+        count += candidate.count(char)# + candidate.count(char - 32)
         # character plus uppercase characters (might be a mistake)
         # Yes, it was a mistake.
 
@@ -39,7 +39,7 @@ def xor_decrypt(encrypted):
         # zfill zero pads a string so that we get 01010101 instead of 1111
         xored = fixed_xor(encrypted, charstring)
 
-        current_score = frequency_score(xored)
+        current_score = frequency_score_simple(xored)
         if current_score > best_score:
             best_score = current_score
             best_guess = xored

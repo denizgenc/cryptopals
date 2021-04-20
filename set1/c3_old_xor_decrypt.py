@@ -4,7 +4,7 @@
 
 from c2_fixed_xor import fixed_xor
 
-def frequency_score(deciphered):
+def frequency_score(candidate):
     """
     Scores a bytes/bytearray object based on the difference of the proportion of
     the characters in that string to the proportion of those characters
@@ -22,19 +22,19 @@ def frequency_score(deciphered):
 
     score = 0
     for char in frequency_dict.keys():
-        total_count = (deciphered.count(char)
-                      + deciphered.count(bytes([int.from_bytes(char, 'big') - 32])) )
+        total_count = (candidate.count(char)
+                      + candidate.count(bytes([int.from_bytes(char, 'big') - 32])) )
             # Need to count uppercase characters too, which are offset by 32
-        proportion = float(total_count) / len(deciphered)
-        # len(deciphered) is why we need to pass the object as a bytes/bytearray
-        # if we .decode() into a string, deciphered will have length 0.
+        proportion = float(total_count) / len(candidate)
+        # len(candidate) is why we need to pass the object as a bytes/bytearray
+        # if we .decode() into a string, candidate will have length 0.
         # This is because the loop in xor_decrypt XORs the string against every
         # possible byte - so the first character in the string will eventually
-        # be EOF, and we will have a zero length deciphered.
+        # be EOF, and we will have a zero length candidate.
         # This leads to a division by zero error, of course.
         score += abs(proportion - frequency_dict[char])
 
-    # The following checks for control characters in deciphered, and penalises
+    # The following checks for control characters in candidate, and penalises
     # for each one
     for byte in deciphered: # individual elements in a bytearray are ints??
         if byte < 32:
