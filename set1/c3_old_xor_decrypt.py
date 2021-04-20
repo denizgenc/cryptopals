@@ -12,7 +12,9 @@ def frequency_score(candidate):
 
     Better = closer to 0.
 
-    I have concerns around overfitting with this function.
+    I have concerns around overfitting with this function. However, limiting the
+    `frequency_dict` to ETAOIN SHRDLU causes it to fail challenge 3, so I'm keeping it
+    as is.
     """
     # from http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html , retrieved
     # on 2021-04-20T23:07+01:00 )
