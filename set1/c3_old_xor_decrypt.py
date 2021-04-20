@@ -9,8 +9,13 @@ def frequency_score(candidate):
     Scores a bytes/bytearray object based on the difference of the proportion of
     the characters in that string to the proportion of those characters
     in English.
+
     Better = closer to 0.
+
+    I have concerns around overfitting with this function.
     """
+    # from http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html , retrieved
+    # on 2021-04-20T23:07+01:00 )
     frequency_dict = {b'e': 12.02, b't': 9.10, b'a': 8.12, b'o': 7.68,
                       b'i': 7.31, b'n': 6.95, b's': 6.28, b'r': 6.02,
                       b'h': 5.92, b'd': 4.32, b'l': 3.98, b'u': 2.88,
