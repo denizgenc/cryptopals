@@ -18,6 +18,7 @@ def frequency_score_intricate(candidate):
     """
     # from http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html , retrieved
     # on 2021-04-20T23:07+01:00 )
+    # TODO: Use a frequency table that includes spaces (and potentially other punctutation)
     frequency_dict = {b'e': 12.02, b't': 9.10, b'a': 8.12, b'o': 7.68,
                       b'i': 7.31, b'n': 6.95, b's': 6.28, b'r': 6.02,
                       b'h': 5.92, b'd': 4.32, b'l': 3.98, b'u': 2.88,
