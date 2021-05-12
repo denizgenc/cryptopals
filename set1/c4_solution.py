@@ -8,7 +8,7 @@ from c3_xor_decrypt import xor_decrypt
 with open("input/4.txt") as file:
     scores_and_strings = {}
     for line in file:
-        decrypt, score, key = xor_decrypt(line.strip('\n')) # strip trailing newline
+        decrypt, score, key = xor_decrypt(bytes.fromhex(line.strip('\n')))
         scores_and_strings[score] = [decrypt.decode(errors="ignore"), line]
 
 best_score = sorted(scores_and_strings)[-1] # sort by keys, then get highest key

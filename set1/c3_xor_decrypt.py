@@ -51,7 +51,7 @@ def frequency_score_intricate(candidate):
 
 def xor_decrypt_intricate(encrypted):
     """
-    Takes a hex string called encrypted and tries to XOR it against every possible
+    Takes a bytes object called encrypted and tries to XOR it against every possible
     byte.
     Returns a bytes object called the best_guess, and an integer representing its
     best score called best_score. The lower the best_score, the better.
@@ -62,11 +62,11 @@ def xor_decrypt_intricate(encrypted):
     best_guess = None
     best_key = 0
     for i in range(256):
-        charstring = format(i, "x").zfill(2) * (len(encrypted)//2)
+        bytestring = bytes([i for _ in range(len(encrypted))])
         # the above makes a string of repeating chars the same size as the string
         # we're decoding so that we can feed them both into the imported fixed_xor
         # zfill zero pads a string so that we get 01010101 instead of 1111
-        xored = fixed_xor(encrypted, charstring)
+        xored = fixed_xor(encrypted, bytestring)
 
         current_score = frequency_score_intricate(xored)
         if current_score < best_score:
@@ -94,7 +94,7 @@ def frequency_score_simple(candidate):
 
 def xor_decrypt_simple(encrypted):
     """
-    Takes a hex string called encrypted and tries to XOR it against every possible
+    Takes a bytes object called encrypted and tries to XOR it against every possible
     byte.
     Returns a bytes object called the best_guess, and an integer representing its
     best score called best_score. The higher the best_score, the better.
@@ -105,11 +105,8 @@ def xor_decrypt_simple(encrypted):
     best_guess = None
     best_key = 0
     for i in range(256):
-        charstring = format(i, "x").zfill(2) * (len(encrypted)//2)
-        # the above makes a string of repeating chars the same size as the string
-        # we're decoding so that we can feed them both into the imported fixed_xor
-        # zfill zero pads a string so that we get 01010101 instead of 1111
-        xored = fixed_xor(encrypted, charstring)
+        bytestring = bytes([i for _ in range(len(encrypted))])
+        xored = fixed_xor(encrypted, bytestring)
 
         current_score = frequency_score_simple(xored)
         if current_score > best_score:
@@ -127,7 +124,7 @@ def xor_decrypt(encrypted):
     return xor_decrypt_simple(encrypted)
 
 if __name__ == "__main__":
-    hex_string = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
+    hex_string = bytes.fromhex("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
     decrypted, score, _ = xor_decrypt_intricate(hex_string)
     # decrypted, score, _ = xor_decrypt_simple(hex_string)
 

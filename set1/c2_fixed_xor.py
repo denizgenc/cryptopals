@@ -7,18 +7,15 @@
 # ... should produce:
 # 746865206b696420646f6e277420706c6179
 
-def fixed_xor(hexstring1, hexstring2):
-    first = bytes.fromhex(hexstring1)
-    second = bytes.fromhex(hexstring2)
-
+def fixed_xor(first, second):
     xored_bytes = [byte1 ^ byte2 for byte1, byte2 in zip(first, second)]
     
     return bytes(xored_bytes)
 
 if __name__ == "__main__":
-    string1 = "1c0111001f010100061a024b53535009181c"
-    string2 = "686974207468652062756c6c277320657965"
-    answer = fixed_xor(string1,string2).hex() # convert to hex string
+    bytestring1 = bytes.fromhex("1c0111001f010100061a024b53535009181c")
+    bytestring2 = bytes.fromhex("686974207468652062756c6c277320657965")
+    answer = fixed_xor(bytestring1, bytestring2).hex() # convert to hex string
     check = "746865206b696420646f6e277420706c6179"
 
     print("Did I get it right?", answer == check)
