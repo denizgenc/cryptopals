@@ -27,7 +27,7 @@ for keysize in best_keysizes:
     transposed = transpose(bytes_file, keysize)
     single_char_keys = []
     for block in transposed:
-        decoded, score, key = xor_decrypt(bytes(block).hex())
+        decoded, score, key = xor_decrypt(bytes(block))
         print("Decoded:\n", decoded)
         single_char_keys.append(key)
     print(f"The key is {bytes(single_char_keys).decode(encoding='utf-8')}")
